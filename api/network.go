@@ -10,6 +10,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+  "github.com/sirupsen/logrus"
 )
 
 type HTTPError struct {
@@ -39,7 +40,8 @@ func Request(method string, pathname string, templateData map[string]string, pay
 			return nil, err
 		}
 
-		fmt.Println(normalized)
+    logrus.Debug(normalized)
+
 
 		req, err := http.NewRequest(method, normalized, payload)
 
