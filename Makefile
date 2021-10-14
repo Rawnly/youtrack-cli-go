@@ -14,10 +14,13 @@ tar:
 	tar -czf $(bin).tar.gz --directory=$(buildFolder) $(bin)
 	shasum -a 256 $(bin).tar.gz
 
-prepare: build tar
+upload-assets:
+	gh release upload $(version)  $(buildPath) $(bin).tar.gz
+	gh release view $(version) --json assets -q ".assets[1].url"
+
+publish: build tar tag upload-assets
 
 tag:
-	git tag -a $(version) -m "Version: $(version)"
-	git push --tags
+	gh release create $(version) -t "v$(version)"
 
 
