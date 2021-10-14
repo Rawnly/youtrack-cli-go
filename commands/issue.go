@@ -59,7 +59,15 @@ func IssueInfoCmd(storage *util.Storage) *cobra.Command {
   return cmd
 }
 
+type issueTimeOpts struct {
+  Minutes bool `json:"minutes"`
+}
+
 func IssueTimeCmd(storage *util.Storage) *cobra.Command {
+  opts := &issueTimeOpts{
+    Minutes: false,
+  }
+
   cmd := &cobra.Command{
     Use: "time <issue>",
     Short: "Display spentTime on an issue",
@@ -78,9 +86,16 @@ func IssueTimeCmd(storage *util.Storage) *cobra.Command {
         cmd.PrintErr(err.Error())
       }
 
+      if opts.Minutes {
+        cmd.Println(estimation.Value.Minutes)
+        return
+      }
+
       cmd.Println(estimation.Value.Presentation)
     },
   }
+
+  cmd.Flags().BoolVar(&opts.Minutes, "minutes", false, "Display time in minutes")
 
   return cmd
 }

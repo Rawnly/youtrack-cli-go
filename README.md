@@ -12,3 +12,8 @@ Via homebrew:
 Via Github:
 - Download the latest release (here)[/releases/latest]
 - Move into your `$PATH`
+
+
+## Local Debugging
+You can use `make install` to install build binaries locally.
+
