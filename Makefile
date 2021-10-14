@@ -1,9 +1,19 @@
-build:
-	go build -o youtrack
+bin := youtrack
 
-run:
-	go build -o youtrack
-	./youtrack issue SF-29
+
+build:
+	go build -o build/$(bin)
 
 install:
-	mv ./youtrack /usr/local/bin/
+	go build -o build/$(bin)
+	mv ./build/$(bin) /usr/local/bin/
+
+tar:
+	tar -czf $(bin).tar.gz --directory=./build $(bin)
+	shasum -a 256 $(bin).tar.gz
+
+tag:
+	git tag -a $(version) -m "Version: $(version)"
+	git push --tags
+
+
