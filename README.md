@@ -10,7 +10,7 @@ Via homebrew:
 ```
 
 Via Github:
-- Download the latest release (here)[/releases/latest]
+- Download the latest release [here](/releases/latest)
 - Move into your `$PATH`
 
 
